@@ -1,0 +1,18 @@
+<Project Sdk="Microsoft.NET.Sdk.Web">
+
+  <PropertyGroup>
+    <TargetFramework>netcoreapp3.1</TargetFramework>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Microsoft.AspNetCore.Identity.EntityFrameworkCore" Version="3.1.0" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\DotNetApp.Application1\DotNetApp.Application1.csproj" />
+    <ProjectReference Include="..\DotNetApp.Application\DotNetApp.Application.csproj" />
+    <ProjectReference Include="..\DotNetApp.Core\DotNetApp.Core.csproj" />
+    <ProjectReference Include="..\DotNetApp.Infrastructure\DotNetApp.Infrastructure.csproj" />
+  </ItemGroup>
+
+</Project>
