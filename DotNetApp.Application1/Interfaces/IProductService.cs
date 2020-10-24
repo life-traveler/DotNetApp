@@ -9,6 +9,10 @@ namespace DotNetApp.Application1.Interfaces
    public  interface IProductService
     {
         //methods for products
+
+        //we are returning productModel not product
+        //add another method : editable 
+        //separeate layer 
         Task<IEnumerable<ProductModel>> GetProductList();
         Task<ProductModel> GetProductById(int productId);
         Task<ProductModel> GetProductBySlug(string slug);

@@ -9,8 +9,13 @@ namespace DotNetApp.Core.Specification
     public class ProductWithCategorySpecification : BaseSpecification<Product>
     {
         public ProductWithCategorySpecification(string productName)
+            //product will be called from baseSpecification which is a superclass
+            //calling superclass with parameter product name 
+            // fisrt will call superClass(base) constructor where it set the predicate first
+
             : base(p => p.Name.ToLower().Contains(productName.ToLower()))
         {
+            //then will execute here
             AddInclude(p => p.Category);
         }
 

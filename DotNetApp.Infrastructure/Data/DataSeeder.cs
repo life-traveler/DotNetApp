@@ -8,11 +8,12 @@ using System.Threading.Tasks;
 
 namespace DotNetApp.Infrastructure.Data
 {
-    class DataSeeder
+   public class DataSeeder
     {
         //fill all the databse table data
         //seedAsync : name of teh method to fill data
 
+        //WHAT IS ILOGGERFACTORY
         public static async Task SeedAsync(DotNetAppContext aspnetrunContext, ILoggerFactory loggerFactory, int? retry = 0)
         {
             int retryForAvailability = retry.Value;
@@ -29,7 +30,7 @@ namespace DotNetApp.Infrastructure.Data
                 if (retryForAvailability < 10)
                 {
                     retryForAvailability++;
-                    var log = loggerFactory.CreateLogger<DotNetAppContextSeed>();
+                    var log = loggerFactory.CreateLogger<DotNetAppContext>();
                     log.LogError(exception.Message);
                     await SeedAsync
                         (aspnetrunContext, loggerFactory, retryForAvailability);
@@ -42,10 +43,11 @@ namespace DotNetApp.Infrastructure.Data
 
         //to check if the categories already have data then return that data , otherwise fill the category with new data
         private static async Task SeedCategoriesAsync(DotNetAppContext aspnetrunContext)
-        {
+        {//CHECKING FOR THE DATA INSIDE THE CATEGORY , THEN IT WILL RETURN
             if (aspnetrunContext.Categories.Any())
                 return;
 
+            //OTHERWISE IT  WILL ADD THE DATA 
             var categories = new List<Category>()
             {
                 new Category() { Name = "Laptop"}, // 1
@@ -108,7 +110,7 @@ namespace DotNetApp.Infrastructure.Data
 
         private static async Task SeedProductsAsync(DotNetAppContext aspnetrunContext)
         {
-            if (aspnetrunContext.Reviews.Any())
+            if (aspnetrunContext.Products.Any())
                 return;
             var products = new List<Product>
             {

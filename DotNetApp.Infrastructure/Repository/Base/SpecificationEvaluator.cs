@@ -8,7 +8,7 @@ using System.Text;
 
 namespace DotNetApp.Infrastructure.Repository.Base
 {
-    //to evaluate specification 
+    //to evaluate specification //implementation of the method
     public class SpecificationEvaluator<T> where T : Entity
     {
         public static IQueryable<T> GetQuery(IQueryable<T> inputQuery, ISpecification<T> specification)

@@ -2,7 +2,6 @@
 using DotNetApp.Application1.Interfaces;
 using DotNetApp.Application1.Mapper;
 using DotNetApp.Application1.Models.Product;
-
 using DotNetApp.Core.Entities;
 using DotNetApp.Core.Interface;
 using DotNetApp.Core.Repositories;
@@ -13,7 +12,7 @@ using System.Threading.Tasks;
 
 namespace DotNetApp.Application1.Services
 {
-   //we collect information from the databse as in domain model format . We need to map to the biew model format from domain model format
+   //we collect information from the database as in domain model format . We need to map to the (view model format from domain model format
    //so we use mapper(object mapper)
 
     public class ProductService : IProductService
@@ -21,8 +20,10 @@ namespace DotNetApp.Application1.Services
         private readonly IProductRepository _productRepository;
         private readonly IAppLogger<ProductService> _logger;
 
+        //initialization of service
         public ProductService(IProductRepository productRepository, IAppLogger<ProductService> logger)
         {
+
             _productRepository = productRepository ?? throw new ArgumentNullException(nameof(productRepository));
             _logger = logger ?? throw new ArgumentNullException(nameof(logger));
         }
@@ -31,6 +32,9 @@ namespace DotNetApp.Application1.Services
         {
             var productList = await _productRepository.GetProductListAsync();
             //return type is product model type but we need product type so , we do mapping 
+            //conevrt productList to productModel
+            //source productList
+            //destination IEn<ProdutModel>
             var mapped = ObjectMapperClass.Mapper.Map<IEnumerable<ProductModel>>(productList);
             return mapped;
         }
@@ -63,6 +67,8 @@ namespace DotNetApp.Application1.Services
             return mapped;
         }
 
+
+        //add new product by Admin
         public async Task<ProductModel> Create(ProductModel productModel)
         {
             await ValidateProductIfExist(productModel);
@@ -103,6 +109,7 @@ namespace DotNetApp.Application1.Services
             _logger.LogInformation($"Entity successfully deleted - AspnetRunAppService");
         }
 
+        //custom validation 
         private async Task ValidateProductIfExist(ProductModel productModel)
         {
             var existingEntity = await _productRepository.GetByIdAsync(productModel.Id);

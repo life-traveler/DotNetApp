@@ -28,7 +28,8 @@ namespace DotNetApp.Infrastructure.Data
         public DbSet<Review> Reviews { get; set; }
 
 
-        //creating table which is collecting all entities
+        //creating table which is collecting all entities THROUGH MODEL
+        //SO THE NMAE IN DATABASE WILL BE PRODUCT AND NOT PRODUCTS
         private static void SetTableNamesAsSingle(ModelBuilder builder)
         {
             // Use the entity name instead of the Context.DbSet<T> name

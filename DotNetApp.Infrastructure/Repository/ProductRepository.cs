@@ -14,6 +14,8 @@ namespace DotNetApp.Infrastructure.Repository
 {
     public class ProductRepository : Repository<Product>, IProductRepository
     {
+        // WHENEVERT WE USE PROD REPO WE TO PASS THE CONETEXT CLASS INSTANCE
+        //why
         public ProductRepository(DotNetAppContext dbContext) : base(dbContext)
         {
         }
@@ -58,7 +60,8 @@ namespace DotNetApp.Infrastructure.Repository
             return await _dbContext.Products
                 .Where(x => x.CategoryId == categoryId)
                 .ToListAsync();
-        }
 
+
+        }
     }
 }

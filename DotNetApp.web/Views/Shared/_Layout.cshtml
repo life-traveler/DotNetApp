@@ -1,48 +1,735 @@
-﻿<!DOCTYPE html>
+﻿@using Microsoft.AspNetCore.Identity
+@inject SignInManager<IdentityUser> SignInManager
+@inject UserManager<IdentityUser> UserManager
+@inject UserManager<IdentityUser> userManager
+
+<!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>@ViewData["Title"] - DotNetApp.web</title>
-    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
-    <link rel="stylesheet" href="~/css/site.css" />
+
+    <meta charset="utf-8">
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+    <title>@ViewData["Title"] - Alfonso - E&E - Electronics eCommerce Bootstrap4 HTML Template</title>
+    <meta name="description" content="">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- Favicon -->
+    <link rel="shortcut icon" type="image/x-icon" href="~/assets/images/favicon.ico">
+
+
+    <!-- CSS
+    ============================================ -->
+
+
+
+
+
+    @if (User.IsInRole("Administrator"))
+    {
+        <!-- Custom fonts for this template-->
+        <link href="~/admin/vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
+        <link href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i" rel="stylesheet">
+
+        <!-- Custom styles for this template-->
+        <link href="~/admin/css/sb-admin-2.min.css" rel="stylesheet">
+    }
+
+    else
+    {
+        <!-- Bootstrap CSS -->
+        <link rel="stylesheet" href="~/assets/css/bootstrap.min.css">
+
+        <!-- Icon Font CSS -->
+        <link rel="stylesheet" href="~/assets/css/icon-font.min.css">
+
+        <!-- Plugins CSS -->
+        <link rel="stylesheet" href="~/assets/css/plugins.css">
+
+        <!-- Main Style CSS -->
+        <link rel="stylesheet" href="~/assets/css/style.css">
+
+        <!-- Modernizer JS -->
+        <script src="~/assets/js/vendor/modernizr-2.8.3.min.js"></script>
+
+    }
+
+
 </head>
+
 <body>
-    <header>
-        <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow mb-3">
-            <div class="container">
-                <a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="Index">DotNetApp.web</a>
-                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target=".navbar-collapse" aria-controls="navbarSupportedContent"
-                        aria-expanded="false" aria-label="Toggle navigation">
-                    <span class="navbar-toggler-icon"></span>
+    @if (User.IsInRole("Administrator"))
+    {
+
+
+          <!-- Page Wrapper -->
+  <div id="wrapper">
+
+    <!-- Sidebar -->
+      <partial name="_AdminSideBarLayoutPartial" />
+    <!-- End of Sidebar -->
+
+    <!-- Content Wrapper -->
+      <div id="content-wrapper" class="d-flex flex-column">
+
+          <!-- Main Content -->
+          <div id="content">
+
+              <!-- Topbar -->
+              <nav class="navbar navbar-expand navbar-light bg-white topbar mb-4 static-top shadow">
+
+                  <!-- Sidebar Toggle (Topbar) -->
+                  <button id="sidebarToggleTop" class="btn btn-link d-md-none rounded-circle mr-3">
+                      <i class="fa fa-bars"></i>
+                  </button>
+
+                  <!-- Topbar Search -->
+                  <form class="d-none d-sm-inline-block form-inline mr-auto ml-md-3 my-2 my-md-0 mw-100 navbar-search">
+                      <div class="input-group">
+                          <input type="text" class="form-control bg-light border-0 small" placeholder="Search for..." aria-label="Search" aria-describedby="basic-addon2">
+                          <div class="input-group-append">
+                              <button class="btn btn-primary" type="button">
+                                  <i class="fas fa-search fa-sm"></i>
+                              </button>
+                          </div>
+                      </div>
+                  </form>
+
+                  <!-- Topbar Navbar -->
+                  <ul class="navbar-nav ml-auto">
+
+                      <!-- Nav Item - Search Dropdown (Visible Only XS) -->
+                      <li class="nav-item dropdown no-arrow d-sm-none">
+                          <a class="nav-link dropdown-toggle" href="#" id="searchDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                              <i class="fas fa-search fa-fw"></i>
+                          </a>
+                          <!-- Dropdown - Messages -->
+                          <div class="dropdown-menu dropdown-menu-right p-3 shadow animated--grow-in" aria-labelledby="searchDropdown">
+                              <form class="form-inline mr-auto w-100 navbar-search">
+                                  <div class="input-group">
+                                      <input type="text" class="form-control bg-light border-0 small" placeholder="Search for..." aria-label="Search" aria-describedby="basic-addon2">
+                                      <div class="input-group-append">
+                                          <button class="btn btn-primary" type="button">
+                                              <i class="fas fa-search fa-sm"></i>
+                                          </button>
+                                      </div>
+                                  </div>
+                              </form>
+                          </div>
+                      </li>
+
+                      <!-- Nav Item - Alerts -->
+                      <li class="nav-item dropdown no-arrow mx-1">
+                          <a class="nav-link dropdown-toggle" href="#" id="alertsDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                              <i class="fas fa-bell fa-fw"></i>
+                              <!-- Counter - Alerts -->
+                              <span class="badge badge-danger badge-counter">3+</span>
+                          </a>
+                          <!-- Dropdown - Alerts -->
+                          <div class="dropdown-list dropdown-menu dropdown-menu-right shadow animated--grow-in" aria-labelledby="alertsDropdown">
+                              <h6 class="dropdown-header">
+                                  Alerts Center
+                              </h6>
+                              <a class="dropdown-item d-flex align-items-center" href="#">
+                                  <div class="mr-3">
+                                      <div class="icon-circle bg-primary">
+                                          <i class="fas fa-file-alt text-white"></i>
+                                      </div>
+                                  </div>
+                                  <div>
+                                      <div class="small text-gray-500">December 12, 2019</div>
+                                      <span class="font-weight-bold">A new monthly report is ready to download!</span>
+                                  </div>
+                              </a>
+                              <a class="dropdown-item d-flex align-items-center" href="#">
+                                  <div class="mr-3">
+                                      <div class="icon-circle bg-success">
+                                          <i class="fas fa-donate text-white"></i>
+                                      </div>
+                                  </div>
+                                  <div>
+                                      <div class="small text-gray-500">December 7, 2019</div>
+                                      $290.29 has been deposited into your account!
+                                  </div>
+                              </a>
+                              <a class="dropdown-item d-flex align-items-center" href="#">
+                                  <div class="mr-3">
+                                      <div class="icon-circle bg-warning">
+                                          <i class="fas fa-exclamation-triangle text-white"></i>
+                                      </div>
+                                  </div>
+                                  <div>
+                                      <div class="small text-gray-500">December 2, 2019</div>
+                                      Spending Alert: We've noticed unusually high spending for your account.
+                                  </div>
+                              </a>
+                              <a class="dropdown-item text-center small text-gray-500" href="#">Show All Alerts</a>
+                          </div>
+                      </li>
+
+                      <!-- Nav Item - Messages -->
+                      <li class="nav-item dropdown no-arrow mx-1">
+                          <a class="nav-link dropdown-toggle" href="#" id="messagesDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                              <i class="fas fa-envelope fa-fw"></i>
+                              <!-- Counter - Messages -->
+                              <span class="badge badge-danger badge-counter">7</span>
+                          </a>
+                          <!-- Dropdown - Messages -->
+                          <div class="dropdown-list dropdown-menu dropdown-menu-right shadow animated--grow-in" aria-labelledby="messagesDropdown">
+                              <h6 class="dropdown-header">
+                                  Message Center
+                              </h6>
+                              <a class="dropdown-item d-flex align-items-center" href="#">
+                                  <div class="dropdown-list-image mr-3">
+                                      <img class="rounded-circle" src="https://source.unsplash.com/fn_BT9fwg_E/60x60" alt="">
+                                      <div class="status-indicator bg-success"></div>
+                                  </div>
+                                  <div class="font-weight-bold">
+                                      <div class="text-truncate">Hi there! I am wondering if you can help me with a problem I've been having.</div>
+                                      <div class="small text-gray-500">Emily Fowler · 58m</div>
+                                  </div>
+                              </a>
+                              <a class="dropdown-item d-flex align-items-center" href="#">
+                                  <div class="dropdown-list-image mr-3">
+                                      <img class="rounded-circle" src="https://source.unsplash.com/AU4VPcFN4LE/60x60" alt="">
+                                      <div class="status-indicator"></div>
+                                  </div>
+                                  <div>
+                                      <div class="text-truncate">I have the photos that you ordered last month, how would you like them sent to you?</div>
+                                      <div class="small text-gray-500">Jae Chun · 1d</div>
+                                  </div>
+                              </a>
+                              <a class="dropdown-item d-flex align-items-center" href="#">
+                                  <div class="dropdown-list-image mr-3">
+                                      <img class="rounded-circle" src="https://source.unsplash.com/CS2uCrpNzJY/60x60" alt="">
+                                      <div class="status-indicator bg-warning"></div>
+                                  </div>
+                                  <div>
+                                      <div class="text-truncate">Last month's report looks great, I am very happy with the progress so far, keep up the good work!</div>
+                                      <div class="small text-gray-500">Morgan Alvarez · 2d</div>
+                                  </div>
+                              </a>
+                              <a class="dropdown-item d-flex align-items-center" href="#">
+                                  <div class="dropdown-list-image mr-3">
+                                      <img class="rounded-circle" src="https://source.unsplash.com/Mv9hjnEUHR4/60x60" alt="">
+                                      <div class="status-indicator bg-success"></div>
+                                  </div>
+                                  <div>
+                                      <div class="text-truncate">Am I a good boy? The reason I ask is because someone told me that people say this to all dogs, even if they aren't good...</div>
+                                      <div class="small text-gray-500">Chicken the Dog · 2w</div>
+                                  </div>
+                              </a>
+                              <a class="dropdown-item text-center small text-gray-500" href="#">Read More Messages</a>
+                          </div>
+                      </li>
+
+                      <div class="topbar-divider d-none d-sm-block"></div>
+
+                      <!-- Nav Item - User Information -->
+                      <li class="nav-item dropdown no-arrow">
+                          <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                              <span class="mr-2 d-none d-lg-inline text-gray-600 small"><span>@UserManager.GetUserName(User).Split('@').FirstOrDefault()</span></span>
+                              <img class="img-profile rounded-circle" src="https://source.unsplash.com/QAB-WJcbgJk/60x60">
+                          </a>
+                          <!-- Dropdown - User Information -->
+                          <div class="dropdown-menu dropdown-menu-right shadow animated--grow-in" aria-labelledby="userDropdown">
+                              <a class="dropdown-item" asp-action="AdminProfile" asp-controller="Admin">
+                                  <i class="fas fa-user fa-sm fa-fw mr-2 text-gray-400"></i>
+                                  Profile
+
+                              </a>
+                              <a class="dropdown-item" href="#">
+                                  <i class="fas fa-cogs fa-sm fa-fw mr-2 text-gray-400"></i>
+                                  Settings
+                              </a>
+                              <a class="dropdown-item" href="#">
+                                  <i class="fas fa-list fa-sm fa-fw mr-2 text-gray-400"></i>
+                                  Activity Log
+                              </a>
+                              <div class="dropdown-divider"></div>
+                              <a class="dropdown-item" href="#" data-toggle="modal" data-target="#logoutModal">
+                                  <i class="fas fa-sign-out-alt fa-sm fa-fw mr-2 text-gray-400"></i>
+                                  Logout
+                              </a>
+                          </div>
+                      </li>
+
+                  </ul>
+
+              </nav>
+              <!-- End of Topbar -->
+              <!-- Begin Page Content -->
+              <div class="container-fluid">
+
+                  <!-- Page Heading -->
+                  <div class="d-sm-flex align-items-center justify-content-between mb-4">
+                      <h1 class="h3 mb-0 text-gray-800">Dashboard</h1>
+                      <a href="#" class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm"><i class="fas fa-download fa-sm text-white-50"></i> Generate Report</a>
+                  </div>
+
+
+              </div>
+              <!-- /.container-fluid -->
+              @RenderBody()
+          </div>
+          <!-- End of Main Content -->
+          <!-- Footer -->
+          <footer class="sticky-footer bg-white">
+              <div class="container my-auto">
+                  <div class="copyright text-center my-auto">
+                      <span>Copyright &copy; Your Website 2020</span>
+                  </div>
+              </div>
+          </footer>
+          <!-- End of Footer -->
+
+      </div>
+    <!-- End of Content Wrapper -->
+
+  </div>
+  <!-- End of Page Wrapper -->
+
+  <!-- Scroll to Top Button-->
+  <a class="scroll-to-top rounded" href="#page-top">
+    <i class="fas fa-angle-up"></i>
+  </a>
+
+  <!-- Logout Modal-->
+<div class="modal fade" id="logoutModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Ready to Leave?</h5>
+                <button class="close" type="button" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">×</span>
                 </button>
-                <div class="navbar-collapse collapse d-sm-inline-flex flex-sm-row-reverse">
-                    <ul class="navbar-nav flex-grow-1">
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Index">Home</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
-                        </li>
-                    </ul>
+            </div>
+            <div class="modal-body">Select "Logout" below if you are ready to end your current session.</div>
+            <div class="modal-footer">
+                <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancel</button>
+                <a class="btn btn-primary" href="login.html">Logout</a>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+    }
+
+
+    else
+    {
+
+
+    <!-- Header Section Start -->
+    <div class="header-section section">
+
+        <!-- Header Top Start -->
+        <div class="header-top header-top-one header-top-border pt-10 pb-10">
+            <div class="container">
+                <div class="row align-items-center justify-content-between">
+
+                    <div class="col mt-10 mb-10">
+                        <!-- Header Links Start -->
+                        <p>HELOOO DID NOT NDERSTAS</p>
+                        <div class="header-links">
+                            <a asp-area="" asp-page="/TrackOrder"><img src="~/assets/images/icons/car.png" alt="Car Icon"> <span>Track your order</span></a>
+                            <a asp-area="" asp-page="/Store"><img src="~/assets/images/icons/marker.png" alt="Car Icon"> <span>Locate Store</span></a>
+                        </div><!-- Header Links End -->
+                    </div>
+
+                    <div class="col order-12 order-xs-12 order-lg-2 mt-10 mb-10">
+                        <!-- Header Advance Search Start -->
+                        <div class="header-advance-search">
+
+                            <form action="#">
+                                <div class="input"><input type="text" placeholder="Search your product"></div>
+                                <div class="select">
+                                    <select class="nice-select">
+                                        <option>All Categories</option>
+                                        <option>Mobile</option>
+                                        <option>Computer</option>
+                                        <option>Laptop</option>
+                                        <option>Camera</option>
+                                    </select>
+                                </div>
+                                <div class="submit"><button><i class="icofont icofont-search-alt-1"></i></button></div>
+                            </form>
+
+                        </div><!-- Header Advance Search End -->
+                    </div>
+
+                    <div class="col order-2 order-xs-2 order-lg-12 mt-10 mb-10">
+
+                        <partial name="_LoginPartial" />
+
+                        @*<!-- Header Account Links Start -->
+                            <div class="header-account-links">
+                                <a asp-page="Register"><i class="icofont icofont-user-alt-7"></i> <span>my account</span></a>
+                                <a asp-page="Login"><i class="icofont icofont-login d-none"></i> <span>Login</span></a>
+                            </div>
+                            <!-- Header Account Links End -->*@
+                    </div>
+
                 </div>
             </div>
-        </nav>
-    </header>
-    <div class="container">
-        <main role="main" class="pb-3">
-            @RenderBody()
-        </main>
-    </div>
-
-    <footer class="border-top footer text-muted">
-        <div class="container">
-            &copy; 2020 - DotNetApp.web - <a asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
         </div>
-    </footer>
-    <script src="~/lib/jquery/dist/jquery.min.js"></script>
-    <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
-    <script src="~/js/site.js" asp-append-version="true"></script>
+        <!-- Header Top End -->
+        <!-- Header Bottom Start -->
+        <div class="header-bottom header-bottom-one header-sticky">
+            <div class="container">
+                <div class="row align-items-center justify-content-between">
+
+                    <div class="col mt-15 mb-15">
+                        <!-- Logo Start -->
+                        <div class="header-logo">
+                            <a asp-area="" asp-page="/Index">
+                                <img src="~/assets/images/logo.png" alt="E&E - Electronics eCommerce Bootstrap4 HTML Template">
+                                <img class="theme-dark" src="~/assets/images/logo-light.png" alt="E&E - Electronics eCommerce Bootstrap4 HTML Template">
+                            </a>
+                        </div><!-- Logo End -->
+                    </div>
+
+                    <div class="col order-12 order-lg-2 order-xl-2 d-none d-lg-block">
+                        <!-- Main Menu Start -->
+                        <div class="main-menu">
+                            <nav>
+                                <ul>
+                                    <li class="active"><a asp-area="" asp-page="/Index">HOME</a></li>
+                                    <li>
+                                        <a asp-area="" asp-page="/Products">Shop</a>
+                                    </li>
+                                    <li class="menu-item-has-children">
+                                        <a href="#">PAGES</a>
+                                        <ul class="mega-menu three-column">
+                                            <li>
+                                                <a href="#">Column One</a>
+                                                <ul>
+                                                    <li><a asp-area="" asp-page="/AboutUs">About us</a></li>
+                                                    <li><a asp-area="" asp-page="/BestDeals">Best Deals</a></li>
+                                                    <li><a asp-area="" asp-page="/Cart">Cart</a></li>
+                                                    <li><a asp-area="" asp-page="/CheckOut">Checkout</a></li>
+                                                </ul>
+                                            </li>
+                                            <li>
+                                                <a href="#">Column Two</a>
+                                                <ul>
+                                                    <li><a asp-area="" asp-page="/Compare">Compare</a></li>
+                                                    <li><a asp-area="" asp-page="/Faq">Faq</a></li>
+                                                    <li><a asp-area="" asp-page="/Feature">Feature</a></li>
+                                                    <li><a asp-area="" asp-page="/Login">Login</a></li>
+                                                    <li><a asp-area="" asp-page="/Register">Register</a></li>
+                                                    <li><a asp-area="" asp-page="/Store">Store</a></li>
+                                                </ul>
+                                            </li>
+                                            <li>
+                                                <a href="#">Column Three</a>
+                                                <ul>
+                                                    <li><a asp-area="" asp-page="/TermsConditions">Terms & Conditions</a></li>
+                                                    <li><a asp-area="" asp-page="/TackOrder">Track Order</a></li>
+                                                    <li><a asp-area="" asp-page="/Wishlist">Wishlist</a></li>
+                                                </ul>
+                                            </li>
+                                        </ul>
+                                    </li>
+                                    <li class="menu-item-has-children">
+                                        <a asp-area="" asp-page="/Blogs">BLOG</a>
+                                        <ul class="sub-menu">
+                                            <li><a asp-area="" asp-page="/Blogs">Blog 1 Column Left Sidebar</a></li>
+                                            <li><a asp-area="" asp-page="/BlogDetail">Single Blog Left Sidebar</a></li>
+                                        </ul>
+                                    </li>
+                                    <li><a asp-area="" asp-page="/Contact">CONTACT</a></li>
+                                </ul>
+                            </nav>
+                        </div><!-- Main Menu End -->
+                    </div>
+
+                    <div class="col order-2 order-lg-12 order-xl-12">
+                        <!-- Header Shop Links Start -->
+                        <div class="header-shop-links">
+
+                            <!-- Compare -->
+                            <a asp-area="" asp-page="/Compare" class="header-compare"><i class="ti-control-shuffle"></i></a>
+                            <!-- Wishlist -->
+                            <a asp-area="" asp-page="/Wishlist" class="header-wishlist"><i class="ti-heart"></i> <span class="number">3</span></a>
+                            <!-- Cart -->
+                            <a asp-area="" asp-page="/Cart" class="header-cart"><i class="ti-shopping-cart"></i> <span class="number">3</span></a>
+
+                        </div><!-- Header Shop Links End -->
+                    </div>
+
+                    <!-- Mobile Menu -->
+                    <div class="mobile-menu order-12 d-block d-lg-none col"></div>
+
+                </div>
+            </div>
+        </div>
+
+        <!-- Header Bottom End -->
+        <!-- Header Category Start -->
+        <div class="header-category-section">
+            <div class="container">
+                <div class="row">
+                    <div class="col">
+
+                        <!-- Header Category -->
+                        <div class="header-category">
+
+                            <!-- Category Toggle Wrap -->
+                            <div class="category-toggle-wrap d-block d-lg-none">
+                                <!-- Category Toggle -->
+                                <button class="category-toggle">Categories <i class="ti-menu"></i></button>
+                            </div>
+
+                            <!-- Category Menu -->
+                            <nav class="category-menu">
+                                <ul>
+                                    <li><a asp-area="" asp-page="/Products">Tv & Audio System</a></li>
+                                    <li><a asp-area="" asp-page="/Products">Computer & Laptop</a></li>
+                                    <li><a asp-area="" asp-page="/Products">Phones & Tablets</a></li>
+                                    <li><a asp-area="" asp-page="/Products">Home Appliances</a></li>
+                                    <li><a asp-area="" asp-page="/Products">Kitchen appliances</a></li>
+                                    <li><a asp-area="" asp-page="/Products">Accessories</a></li>
+                                </ul>
+                            </nav>
+
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- Header Category End -->
+
+    </div>
+    <!-- Header Section End -->
+    @if (IsSectionDefined("CartNotRequired"))
+    {
+        RenderSection("CartNotRequired");
+    }
+    else
+    {
+<vc:shopping-cart></vc:shopping-cart>}
+
+    @RenderBody();
+
+    <!-- Brands Section Start -->
+    <div class="brands-section section mb-90">
+        <div class="container">
+            <div class="row">
+
+                <!-- Brand Slider Start -->
+                <div class="brand-slider col">
+                    <div class="brand-item col"><img src="assets/images/brands/brand-1.png" alt="Brands"></div>
+                    <div class="brand-item col"><img src="assets/images/brands/brand-2.png" alt="Brands"></div>
+                    <div class="brand-item col"><img src="assets/images/brands/brand-3.png" alt="Brands"></div>
+                    <div class="brand-item col"><img src="assets/images/brands/brand-4.png" alt="Brands"></div>
+                    <div class="brand-item col"><img src="assets/images/brands/brand-5.png" alt="Brands"></div>
+                </div><!-- Brand Slider End -->
+
+            </div>
+        </div>
+    </div>
+    <!-- Brands Section End -->
+    <!-- Subscribe Section Start -->
+    <div class="subscribe-section section bg-gray pt-55 pb-55">
+        <div class="container">
+            <div class="row align-items-center">
+
+                <!-- Mailchimp Subscribe Content Start -->
+                <div class="col-lg-6 col-12 mb-15 mt-15">
+                    <div class="subscribe-content">
+                        <h2>SUBSCRIBE <span>OUR NEWSLETTER</span></h2>
+                        <h2><span>TO GET LATEST</span> PRODUCT UPDATE</h2>
+                    </div>
+                </div><!-- Mailchimp Subscribe Content End -->
+                <!-- Mailchimp Subscribe Form Start -->
+                <div class="col-lg-6 col-12 mb-15 mt-15">
+
+                    <form class="subscribe-form" action="#">
+                        <input type="email" autocomplete="off" placeholder="Enter your email here" />
+                        <button>subscribe</button>
+                    </form>
+                    <!-- mailchimp-alerts Start -->
+                    <div class="mailchimp-alerts text-centre">
+                        <div class="mailchimp-submitting"></div><!-- mailchimp-submitting end -->
+                        <div class="mailchimp-success"></div><!-- mailchimp-success end -->
+                        <div class="mailchimp-error"></div><!-- mailchimp-error end -->
+                    </div><!-- mailchimp-alerts end -->
+
+                </div><!-- Mailchimp Subscribe Form End -->
+
+            </div>
+        </div>
+    </div>
+    <!-- Subscribe Section End -->
+    <!-- Footer Section Start -->
+    <div class="footer-section section bg-ivory">
+
+        <!-- Footer Top Section Start -->
+        <div class="footer-top-section section pt-90 pb-50">
+            <div class="container">
+
+                <!-- Footer Widget Start -->
+                <div class="row">
+                    <div class="col mb-90">
+                        <div class="footer-widget text-center">
+                            <div class="footer-logo">
+                                <img src="~/assets/images/logo.png" alt="E&E - Electronics eCommerce Bootstrap4 HTML Template">
+                                <img class="theme-dark" src="~/assets/images/logo-light.png" alt="E&E - Electronics eCommerce Bootstrap4 HTML Template">
+                            </div>
+                            <p>Electronics product actual teachings of  he great explorer of the truth, the malder of human happiness. No one rejects</p>
+                        </div>
+                    </div>
+                </div><!-- Footer Widget End -->
+
+                <div class="row">
+
+                    <!-- Footer Widget Start -->
+                    <div class="col-lg-3 col-md-6 col-12 mb-40">
+                        <div class="footer-widget">
+
+                            <h4 class="widget-title">CONTACT INFO</h4>
+
+                            <p class="contact-info">
+                                <span>Address</span>
+                                You address will be here <br>
+                                Lorem Ipsum text
+                            </p>
+
+                            <p class="contact-info">
+                                <span>Phone</span>
+                                <a href="tel:01234567890">01234 567 890</a>
+                                <a href="tel:01234567891">01234 567 891</a>
+                            </p>
+
+                            <p class="contact-info">
+                                <span>Web</span>
+                                <a href="mailto:info@example.com">info@example.com</a>
+                                <a href="#">www.example.com</a>
+                            </p>
+
+                        </div>
+                    </div><!-- Footer Widget End -->
+                    <!-- Footer Widget Start -->
+                    <div class="col-lg-3 col-md-6 col-12 mb-40">
+                        <div class="footer-widget">
+
+                            <h4 class="widget-title">CUSTOMER CARE</h4>
+
+                            <ul class="link-widget">
+                                <li><a href="#">About us</a></li>
+                                <li><a href="#">Features</a></li>
+                                <li><a href="#">My Account</a></li>
+                                <li><a href="#">Cart</a></li>
+                                <li><a href="#">Checkout</a></li>
+                                <li><a href="#">Wishlist</a></li>
+                                <li><a href="#">blog</a></li>
+                                <li><a href="#">Contact</a></li>
+                            </ul>
+
+                        </div>
+                    </div><!-- Footer Widget End -->
+                    <!-- Footer Widget Start -->
+                    <div class="col-lg-3 col-md-6 col-12 mb-40">
+                        <div class="footer-widget">
+
+                            <h4 class="widget-title">INFORMATION</h4>
+
+                            <ul class="link-widget">
+                                <li><a href="#">Track your order</a></li>
+                                <li><a href="#">Locate Store</a></li>
+                                <li><a href="#">Online Support</a></li>
+                                <li><a href="#">Terms & Conditions</a></li>
+                                <li><a href="#">Payment</a></li>
+                                <li><a href="#">Shipping & Returns</a></li>
+                                <li><a href="#">Gift coupon</a></li>
+                                <li><a href="#">Special coupon</a></li>
+                            </ul>
+
+                        </div>
+                    </div><!-- Footer Widget End -->
+                    <!-- Footer Widget Start -->
+                    <div class="col-lg-3 col-md-6 col-12 mb-40">
+                        <div class="footer-widget">
+
+                            <h4 class="widget-title">LATEST TWEET</h4>
+
+                            <div class="footer-tweet"></div>
+
+                        </div>
+                    </div><!-- Footer Widget End -->
+
+                </div>
+
+            </div>
+        </div><!-- Footer Bottom Section Start -->
+        <!-- Footer Bottom Section Start -->
+        <div class="footer-bottom-section section">
+            <div class="container">
+                <div class="row">
+
+                    <!-- Footer Copyright -->
+                    <div class="col-lg-6 col-12">
+                        <div class="footer-copyright"><p>&copy; Copyright, 2018 All Rights Reserved by <a href="https://freethemescloud.com/">Free themes Cloud</a></p></div>
+                    </div>
+
+                    <!-- Footer Payment Support -->
+                    <div class="col-lg-6 col-12">
+                        <div class="footer-payments-image"><img src="~/assets/images/payment-support.png" alt="Payment Support Image"></div>
+                    </div>
+
+                </div>
+            </div>
+        </div><!-- Footer Bottom Section Start -->
+
+    </div>
+    <!-- Footer Section End -->
+    <!-- jQuery JS -->
+    <script src="~/assets/js/vendor/jquery-1.12.4.min.js"></script>
+    <!-- Popper JS -->
+    <script src="~/assets/js/popper.min.js"></script>
+    <!-- Bootstrap JS -->
+    <script src="~/assets/js/bootstrap.min.js"></script>
+    <!-- Plugins JS -->
+    <script src="~/assets/js/plugins.js"></script>
+
+    <!-- Main JS -->
+    <script src="~/assets/js/main.js"></script>
+
+
+
+
+
+
+          @RenderSection("Scripts", required: false)
+    }
+
+    @if(User.IsInRole("Administrator"))
+    {
+         <!-- Bootstrap core JavaScript-->
+  <script src="~/admin/vendor/jquery/jquery.min.js"></script>
+  <script src="~/admin/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+
+  <!-- Core plugin JavaScript-->
+  <script src="~/admin/vendor/jquery-easing/jquery.easing.min.js"></script>
+
+  <!-- Custom scripts for all pages-->
+  <script src="~/admin/js/sb-admin-2.min.js"></script>
+
+  <!-- Page level plugins -->
+  <script src="~/admin/vendor/chart.js/Chart.min.js"></script>
+
+  <!-- Page level custom scripts -->
+  <script src="~/admin/js/demo/chart-area-demo.js"></script>
+  <script src="~/admin/js/demo/chart-pie-demo.js"></script>
     @RenderSection("Scripts", required: false)
+    }
+
+
+
+
+  
 </body>
 </html>

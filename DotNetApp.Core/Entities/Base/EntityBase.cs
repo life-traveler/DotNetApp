@@ -5,7 +5,7 @@ using System.Text;
 namespace DotNetApp.Core.Entities.Base
 {
     //class will inherit from interface 
-    //the 
+    //GENERIC CLASS
     public  abstract class EntityBase<TID>: IEntityBase<TID>
     {
         //implentation of interface

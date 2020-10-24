@@ -8,6 +8,8 @@ namespace DotNetApp.Core.Entities
 {
    public  class Product : Entity 
     {
+
+        //cannot be edited till we do migration as it is connected to teh database 
         [Required, StringLength(80)]
         public string Name { get; set; }
         public string Slug { get; set; }
@@ -21,13 +23,14 @@ namespace DotNetApp.Core.Entities
 
 
         // n-1 relationships
-        //
+        //many products in one category
         public int CategoryId { get; set; }
 
-      //collect 
+      //collect //navigation 
         public Category Category { get; set; }
 
         // 1-n relationships
+        //one product can have many reviews
         public List<Review> Reviews { get; set; } = new List<Review>();
         
     }

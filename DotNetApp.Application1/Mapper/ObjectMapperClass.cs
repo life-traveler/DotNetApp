@@ -8,7 +8,7 @@ using System.Text;
 
 namespace DotNetApp.Application1.Mapper
 {
-    public class ObjectMapperClass
+    public class ObjectMapperClass 
     {
         public static IMapper Mapper
         {
@@ -25,6 +25,7 @@ namespace DotNetApp.Application1.Mapper
      
         //}
 
+        //this is mapping entity with model example product with productModel
         private static void CreateMap()
         {
             AutoMapper.Mapper.Initialize(cfg =>

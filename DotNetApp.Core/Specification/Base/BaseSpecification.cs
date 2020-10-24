@@ -12,13 +12,18 @@ namespace DotNetApp.Core.Specification.Base
         {
             Criteria = criteria;
         }
+
+        // property  will be set as soon as the instance of base class is created alongwith parameter
         public Expression<Func<T, bool>> Criteria { get; }
 
-        //collect data 
+        //collects data 
+        //What is the object here : any Entity
+        //Are these methods? No, properties
         public List<Expression<Func<T, object>>> Includes { get; } = new List<Expression<Func<T, object>>>();
         public List<string> IncludeStrings { get; } = new List<string>();
         public Expression<Func<T, object>> OrderBy { get; private set; }
 
+        
 
         public Expression<Func<T, object>> OrderByDescending { get; private set; }
 
@@ -28,8 +33,11 @@ namespace DotNetApp.Core.Specification.Base
         {
             get; private set;
         } = false;
+
+        //include experssion  we can pass any lambda expression
         protected virtual void AddInclude(Expression<Func<T, object>> includeExpression)
         {
+            //
             Includes.Add(includeExpression);
         }
         protected virtual void AddInclude(string includeString)
@@ -51,20 +59,7 @@ namespace DotNetApp.Core.Specification.Base
             OrderByDescending = orderByDescendingExpression;
 
         }
-        //public Expression<Func<T, bool>> Criteria => throw new NotImplementedException();
 
-        //public List<Expression<Func<T, object>>> Includes => throw new NotImplementedException();
 
-        //public List<string> IncludeStrings => throw new NotImplementedException();
-
-        //public Expression<Func<T, object>> OrderBy => throw new NotImplementedException();
-
-        //public Expression<Func<T, object>> OrderByDescending => throw new NotImplementedException();
-
-        //public int Take => throw new NotImplementedException();
-
-        //public int Skip => throw new NotImplementedException();
-
-        //public bool isPagingEnabled => throw new NotImplementedException();
     }
     }

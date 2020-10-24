@@ -7,6 +7,8 @@ namespace DotNetApp.Application1.Models.Product
 {
    public  class ProductModel :BaseModel
     {
+        //add somethong to productModel : not related to databse it is an intermediate model : Editable
+        //something like ViewModel
         public string Name { get; set; }
         public string Slug { get; set; }
         public string Summary { get; set; }

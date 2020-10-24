@@ -8,6 +8,7 @@ namespace DotNetApp.Core.Specification.Base
     //custom implementation for linq 
    public  interface ISpecification<T>
     {
+        //properties
         Expression<Func<T, bool>> Criteria { get; }
         List<Expression<Func<T, object>>> Includes { get; }
         List<string> IncludeStrings { get; }
