@@ -13,7 +13,7 @@ namespace DotNetApp.Core.Repositories.Base
     {
         //please explain
         Task<IReadOnlyList<T>> GetAllAsync();
-
+        Task<IQueryable<T>> GetAll();
         //predicate : passing specific lambda exp
         // x=>x.cat
         Task<IReadOnlyList<T>> GetAsync(Expression<Func<T, bool>> predicate);

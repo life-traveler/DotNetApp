@@ -4,27 +4,74 @@
 @{
 }
 
-@model IEnumerable<DotNetApp.Web.ViewModels.CategoryViewModel>
+@*@model IEnumerable<DotNetApp.Web.ViewModels.CategoryViewModel>*@
+
+@model DotNetApp.Web.Services.PaginatedList<DotNetApp.Web.ViewModels.CategoryViewModel>
+
+
 
 <table class="table">
     <tr>
-        <th>CategoryId</th>
-        <th>CategoryName</th>
-      
+        @*<th>CategoryId</th>*@
+        @*<th>CategoryName</th*@
+        <th> @Html.ActionLink("Category Name", "Index", new { sorting_order = ViewBag.SortByName })  </th>
+        <th> @Html.ActionLink("Category Id", "Index", new { sorting_order = ViewBag.SortById })  </th>
+
+
     </tr>
     @foreach (var item in Model)
     {
         <tr>
-            <td>
-                @item.Id
-            </td>
+
             <td>
                 @item.Name
             </td>
+            <td>
+                @item.Id
+            </td>
 
         </tr>
+
+
     }
 
 </table>
 
-<p>Categories</p>
+@*@{
+    var prevDisabled = Model.ca.HasPreviousPage ? "disabled" : "";
+    var nextDisabled = !Model.Students.HasNextPage ? "disabled" : "";
+}
+
+<a asp-page="./Index"
+   asp-route-sortOrder="@Model.CurrentSort"
+   asp-route-pageIndex="@(Model.ca .PageIndex - 1)"
+   asp-route-currentFilter="@Model.CurrentFilter"
+   class="btn btn-primary @prevDisabled">
+    Previous
+</a>
+<a asp-page="./Index"
+   asp-route-sortOrder="@Model.CurrentSort"
+   asp-route-pageIndex="@(Model.Students.PageIndex + 1)"
+   asp-route-currentFilter="@Model.CurrentFilter"
+   class="btn btn-primary @nextDisabled">
+    Next
+</a>*@
+@{
+    var prevDisabled = !Model.HasPreviousPage ? "disabled" : "";
+    var nextDisabled = !Model.HasNextPage ? "disabled" : "";
+}
+
+<a asp-action="Index"
+   asp-route-sortOrder="@ViewData["CurrentSort"]"
+   asp-route-pageNumber="@(Model.PageIndex - 1)"
+   asp-route-currentFilter="@ViewData["CurrentFilter"]"
+   class="btn btn-default @prevDisabled">
+    Previous
+</a>
+<a asp-action="Index"
+   asp-route-sortOrder="@ViewData["CurrentSort"]"
+   asp-route-pageNumber="@(Model.PageIndex + 1)"
+   asp-route-currentFilter="@ViewData["CurrentFilter"]"
+   class="btn btn-default @nextDisabled">
+    Next
+</a>

@@ -114,6 +114,13 @@ namespace DotNetApp.Infrastructure.Repository.Base
             _dbContext.Set<T>().Remove(entity);
             await _dbContext.SaveChangesAsync();
         }
+
+     
+        public async Task<IQueryable<T>> GetAll()
+        {
+            IQueryable<T> query = _dbContext.Set<T>();
+            return query;
+        }
     }
 }
 

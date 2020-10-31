@@ -1,9 +1,11 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Reflection;
 using System.Threading.Tasks;
 using AutoMapper;
 using DotNetApp.Application1.Interfaces;
+using DotNetApp.Application1.Mapper;
 using DotNetApp.Application1.Services;
 using DotNetApp.Core.Interface;
 
@@ -17,6 +19,7 @@ using DotNetApp.Infrastructure.Repository;
 using DotNetApp.Infrastructure.Repository.Base;
 using DotNetApp.Web.Interface;
 using DotNetApp.Web.Services;
+//using DotNetApp.Web.Servicess;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpsPolicy;
@@ -93,6 +96,17 @@ namespace DotNetApp.web
 
         private void ConfigureAspnetRunServices(IServiceCollection services)
         {
+
+
+            //var config = new AutoMapper.MapperConfiguration(cfg =>
+            //{
+            //    cfg.AddProfile(new AspnetRunProfileApplication());
+            //});
+            //var mapper = config.CreateMapper();
+            //services.AddSingleton(mapper);
+
+
+            // services.AddAutoMapper(Assembly.GetAssembly(typeof(Startup)));
             //generic repository(implemented generic method)(typeof)
 
             //infrastucture
@@ -109,7 +123,11 @@ namespace DotNetApp.web
             //core
             services.AddScoped(typeof(IAppLogger<>), typeof(LoggerAdapter<>));
 
-            services.AddAutoMapper(typeof(Startup));
+
+            services.AddAutoMapper(c => c.AddProfile<AspnetRunProfileApplication>());
+            //services.AddAutoMapper(typeof(Startup));
+            services.AddAutoMapper(); // Add AutoMapper
+
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
