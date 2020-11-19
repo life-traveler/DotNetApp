@@ -53,6 +53,7 @@ namespace DotNetApp.Infrastructure.Repository
         {
             var spec = new ProductWithCategorySpecification(productId);
             return (await GetAsync(spec)).FirstOrDefault();
+            
         }
 
         public async Task<IEnumerable<Product>> GetProductByCategoryAsync(int categoryId)

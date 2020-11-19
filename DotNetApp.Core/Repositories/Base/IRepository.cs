@@ -13,7 +13,7 @@ namespace DotNetApp.Core.Repositories.Base
     {
         //please explain
         Task<IReadOnlyList<T>> GetAllAsync();
-
+        Task<IQueryable<T>> GetAll();
         //predicate : passing specific lambda exp
         // x=>x.cat
         Task<IReadOnlyList<T>> GetAsync(Expression<Func<T, bool>> predicate);
@@ -28,7 +28,8 @@ namespace DotNetApp.Core.Repositories.Base
                                         bool disableTracking = true);
 
         //Task<IReadOnlyList<T>> GetAsync(ISpecification<T> spec);
-        Task<T> GetByIdAsync(int id);
+        Task<T> GetByIdAsync(object id);
+        
         Task<T> AddAsync(T entity);
         Task UpdateAsync(T entity);
 

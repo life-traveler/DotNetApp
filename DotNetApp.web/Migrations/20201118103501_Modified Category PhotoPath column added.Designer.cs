@@ -4,14 +4,16 @@ using DotNetApp.Infrastructure.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace DotNetApp.Web.Migrations
 {
     [DbContext(typeof(DotNetAppContext))]
-    partial class DotNetAppContextModelSnapshot : ModelSnapshot
+    [Migration("20201118103501_Modified Category PhotoPath column added")]
+    partial class ModifiedCategoryPhotoPathcolumnadded
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder

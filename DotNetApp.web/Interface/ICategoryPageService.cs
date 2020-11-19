@@ -10,9 +10,13 @@ namespace DotNetApp.Web.Interface
     public interface ICategoryPageService
     {
 
-        Task<IEnumerable<CategoryViewModel>> GetCategoryList();
-        
+        Task<IEnumerable<CategoryViewModel>> GetCategoryList1();
+        Task<IQueryable<CategoryViewModel>> GetAllCategory();
+        Task<CategoryViewModel> AddNewCategory(CategoryViewModel categoryViewModel);
 
-        
+        Task DeleteCategory( int id);
+
+
+
     }
 }

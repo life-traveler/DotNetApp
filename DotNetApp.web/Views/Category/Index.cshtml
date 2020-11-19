@@ -4,27 +4,67 @@
 @{
 }
 
-@model IEnumerable<DotNetApp.Web.ViewModels.CategoryViewModel>
+@*@model IEnumerable<DotNetApp.Web.ViewModels.CategoryViewModel>*@
+
+@model DotNetApp.Web.Services.PaginatedList<DotNetApp.Web.ViewModels.CategoryViewModel>
+
+
+<a href="/category/addnewcategory" class="btn btn-info" >Add new category </a>
+
 
 <table class="table">
     <tr>
-        <th>CategoryId</th>
-        <th>CategoryName</th>
-      
+        @*<th>CategoryId</th>*@
+        @*<th>CategoryName</th*@
+        <th> @Html.ActionLink("Category Name", "Index", new { sorting_order = ViewBag.SortByName })  </th>
+        <th> @Html.ActionLink("Category Id", "Index", new { sorting_order = ViewBag.SortById })  </th>
+        <th>Image</th>
+        <th></th>
+
+
     </tr>
     @foreach (var item in Model)
     {
         <tr>
+
+            <td>
+                @item.Name
+            </td>
             <td>
                 @item.Id
             </td>
             <td>
-                @item.Name
+               <img style="height:50px; width:50px;" src="~/Images/@item.PhotoPath"/> 
+            </td>
+            <td>
+                <a href="/category/delete/@item.Id">Delete</a>
             </td>
 
+
         </tr>
+
+
     }
 
 </table>
 
-<p>Categories</p>
+@{
+    var prevDisabled = !Model.HasPreviousPage ? "disabled" : "";
+    var nextDisabled = !Model.HasNextPage ? "disabled" : "";
+}
+
+
+<a asp-action="Index"
+       asp-route-sortOrder="@ViewData["CurrentSort"]"
+       asp-route-pageNumber="@(Model.PageIndex - 1)"
+     
+       class="btn btn-default @prevDisabled">
+        Previous
+</a>
+    <a asp-action="Index"
+       asp-route-sortOrder="@ViewData["CurrentSort"]"
+       asp-route-pageNumber="@(Model.PageIndex + 1)"
+     
+       class="btn btn-default @nextDisabled">
+        Next
+    </a>

@@ -1,4 +1,5 @@
 ﻿using DotNetApp.Web.ViewModels.Base;
+using Microsoft.AspNetCore.Http;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -10,6 +11,9 @@ namespace DotNetApp.Web.ViewModels
     {
         public string Name { get; set; }
         public string Description { get; set; }
-        public string ImageName { get; set; }
+        public IFormFile ImageName { get; set; }
+      
+        public string PhotoPath { get; set; }
+
     }
 }

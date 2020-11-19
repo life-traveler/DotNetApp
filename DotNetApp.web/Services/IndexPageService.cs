@@ -1,5 +1,5 @@
 ﻿using AutoMapper;
-using DotNetApp.Application.Interfaces;
+using DotNetApp.Application1.Interfaces;
 using DotNetApp.Web.Interface;
 using DotNetApp.Web.ViewModels;
 using System;

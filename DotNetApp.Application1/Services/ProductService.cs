@@ -19,13 +19,15 @@ namespace DotNetApp.Application1.Services
     {
         private readonly IProductRepository _productRepository;
         private readonly IAppLogger<ProductService> _logger;
+        private readonly IMapper _mapper;
 
         //initialization of service
-        public ProductService(IProductRepository productRepository, IAppLogger<ProductService> logger)
+        public ProductService(IProductRepository productRepository, IAppLogger<ProductService> logger ,IMapper mapper)
         {
 
             _productRepository = productRepository ?? throw new ArgumentNullException(nameof(productRepository));
             _logger = logger ?? throw new ArgumentNullException(nameof(logger));
+            _mapper = mapper;
         }
 
         public async Task<IEnumerable<ProductModel>> GetProductList()
@@ -35,35 +37,35 @@ namespace DotNetApp.Application1.Services
             //conevrt productList to productModel
             //source productList
             //destination IEn<ProdutModel>
-            var mapped = ObjectMapperClass.Mapper.Map<IEnumerable<ProductModel>>(productList);
+            var mapped = _mapper.Map<IEnumerable<ProductModel>>(productList);
             return mapped;
         }
 
         public async Task<ProductModel> GetProductById(int productId)
         {
             var product = await _productRepository.GetByIdAsync(productId);
-            var mapped = ObjectMapperClass.Mapper.Map<ProductModel>(product);
+            var mapped = _mapper.Map<ProductModel>(product);
             return mapped;
         }
 
         public async Task<ProductModel> GetProductBySlug(string slug)
         {
             var product = await _productRepository.GetProductBySlug(slug);
-            var mapped = ObjectMapperClass.Mapper.Map<ProductModel>(product);
+            var mapped = _mapper.Map<ProductModel>(product);
             return mapped;
         }
 
         public async Task<IEnumerable<ProductModel>> GetProductByName(string productName)
         {
             var productList = await _productRepository.GetProductByNameAsync(productName);
-            var mapped = ObjectMapperClass.Mapper.Map<IEnumerable<ProductModel>>(productList);
+            var mapped = _mapper.Map<IEnumerable<ProductModel>>(productList);
             return mapped;
         }
 
         public async Task<IEnumerable<ProductModel>> GetProductByCategory(int categoryId)
         {
             var productList = await _productRepository.GetProductByCategoryAsync(categoryId);
-            var mapped = ObjectMapperClass.Mapper.Map<IEnumerable<ProductModel>>(productList);
+            var mapped = _mapper.Map<IEnumerable<ProductModel>>(productList);
             return mapped;
         }
 
@@ -73,14 +75,14 @@ namespace DotNetApp.Application1.Services
         {
             await ValidateProductIfExist(productModel);
 
-            var mappedEntity = ObjectMapperClass.Mapper.Map<Product>(productModel);
+            var mappedEntity = _mapper.Map<Product>(productModel);
             if (mappedEntity == null)
                 throw new ApplicationException($"Entity could not be mapped.");
 
             var newEntity = await _productRepository.AddAsync(mappedEntity);
             _logger.LogInformation($"Entity successfully added - AspnetRunAppService");
 
-            var newMappedEntity = ObjectMapperClass.Mapper.Map<ProductModel>(newEntity);
+            var newMappedEntity = _mapper.Map<ProductModel>(newEntity);
             return newMappedEntity;
         }
 
@@ -92,7 +94,7 @@ namespace DotNetApp.Application1.Services
             if (editProduct == null)
                 throw new ApplicationException($"Entity could not be loaded.");
 
-            ObjectMapperClass.Mapper.Map<ProductModel, Product>(productModel, editProduct);
+            _mapper.Map<ProductModel, Product>(productModel, editProduct);
 
             await _productRepository.UpdateAsync(editProduct);
             _logger.LogInformation($"Entity successfully updated - AspnetRunAppService");

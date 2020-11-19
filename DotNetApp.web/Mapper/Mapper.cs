@@ -1,6 +1,7 @@
 ﻿using AutoMapper;
 using DotNetApp.Application1.Models;
 using DotNetApp.Application1.Models.Product;
+using DotNetApp.Core.Entities;
 using DotNetApp.Web.ViewModels;
 using System;
 using System.Collections.Generic;
@@ -15,6 +16,7 @@ namespace DotNetApp.Web.Mapper
 		{
 			CreateMap<ProductModel, ProductViewModel>();
 			CreateMap<CategoryModel, CategoryViewModel>();
+			CreateMap<Category, CategoryViewModel>().ReverseMap();
 		}
 	}
 }

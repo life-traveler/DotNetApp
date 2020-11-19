@@ -8,7 +8,7 @@ using System.Text;
 
 namespace DotNetApp.Application1.Mapper
 {
-    public class ObjectMapperClass 
+    public class ObjectMapper
     {
         public static IMapper Mapper
         {
@@ -17,32 +17,24 @@ namespace DotNetApp.Application1.Mapper
                 return AutoMapper.Mapper.Instance;
             }
         }
-        static ObjectMapperClass()
+        static ObjectMapper()
         {
             CreateMap();
         }
 
-     
-        //}
-
-        //this is mapping entity with model example product with productModel
         private static void CreateMap()
         {
             AutoMapper.Mapper.Initialize(cfg =>
             {
                 cfg.CreateMap<Product, ProductModel>()
-                       .ForMember(dest => dest.Name, opt => opt.MapFrom(src => src.Name)).ReverseMap();
-
+                    .ForMember(dest => dest.Name, opt => opt.MapFrom(src => src.Name)).ReverseMap();
                 cfg.CreateMap<Category, CategoryModel>().ReverseMap();
-                cfg.CreateMap<Review, ReviewModel>().ReverseMap();
                 //cfg.CreateMap<Wishlist, WishlistModel>().ReverseMap();
                 //cfg.CreateMap<Compare, CompareModel>().ReverseMap();
                 //cfg.CreateMap<Order, OrderModel>().ReverseMap();
             });
+
         }
     }
+    
 }
-       
-  
-
-

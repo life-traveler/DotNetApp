@@ -22,10 +22,12 @@ namespace DotNetApp.Infrastructure.Repository.Base
             }
 
             // Includes all expression-based includes
-            query = specification.Includes.Aggregate(query,
+           // fetch a Queryable that includes all expression - based includes
+              query = specification.Includes.Aggregate(query,
                                     (current, include) => current.Include(include));
 
             // Include any string-based include statements
+            // modify the IQueryable to include any string-based include statements
             query = specification.IncludeStrings.Aggregate(query,
                                     (current, include) => current.Include(include));
 

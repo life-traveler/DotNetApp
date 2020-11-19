@@ -37,7 +37,7 @@ namespace DotNetApp.Core.Specification.Base
         //include experssion  we can pass any lambda expression
         protected virtual void AddInclude(Expression<Func<T, object>> includeExpression)
         {
-            //
+           
             Includes.Add(includeExpression);
         }
         protected virtual void AddInclude(string includeString)

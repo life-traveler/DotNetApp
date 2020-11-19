@@ -34,7 +34,7 @@ namespace DotNetApp.Infrastructure.Repository.Base
             return await _dbContext.Set<T>().ToListAsync();
         }
 
-        //explain
+        //explain///hello
         public async Task<IReadOnlyList<T>> GetAsync(ISpecification<T> spec)
         {
             return await ApplySpecification(spec).ToListAsync();
@@ -90,9 +90,21 @@ namespace DotNetApp.Infrastructure.Repository.Base
         }
 
         // WHY IS THIS VIRTUAL
-        public virtual async Task<T> GetByIdAsync(int id)
+        public virtual async Task<T> GetByIdAsync(object id)
         {
-            return await _dbContext.Set<T>().FindAsync(id);
+            T t = null;
+            try
+            {
+                var cat = await _dbContext.Set<T>().FindAsync(id);
+                //return await _dbContext.Set<T>().FindAsync(id);
+                return cat;
+            }
+            catch(Exception exp)
+            {
+                Console.WriteLine(exp.Message);
+            }
+
+            return t;
         }
 
         public async Task<T> AddAsync(T entity)
@@ -111,8 +123,16 @@ namespace DotNetApp.Infrastructure.Repository.Base
 
         public async Task DeleteAsync(T entity)
         {
-            _dbContext.Set<T>().Remove(entity);
+           
+                _dbContext.Set<T>().Remove(entity);
             await _dbContext.SaveChangesAsync();
+        }
+
+     
+        public async Task<IQueryable<T>> GetAll()
+        {
+            IQueryable<T> query = _dbContext.Set<T>();
+            return query;
         }
     }
 }

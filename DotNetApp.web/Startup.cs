@@ -1,9 +1,11 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Reflection;
 using System.Threading.Tasks;
 using AutoMapper;
 using DotNetApp.Application1.Interfaces;
+using DotNetApp.Application1.Mapper;
 using DotNetApp.Application1.Services;
 using DotNetApp.Core.Interface;
 
@@ -17,6 +19,7 @@ using DotNetApp.Infrastructure.Repository;
 using DotNetApp.Infrastructure.Repository.Base;
 using DotNetApp.Web.Interface;
 using DotNetApp.Web.Services;
+//using DotNetApp.Web.Servicess;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpsPolicy;
@@ -44,29 +47,7 @@ namespace DotNetApp.web
             //// use real database
             services.AddDbContext<DotNetAppContext>(c =>
             c.UseSqlServer(Configuration.GetConnectionString("AspnetRunConnection"), x => x.MigrationsAssembly("DotNetApp.Web")));
-            //services.AddDefaultIdentity<IdentityUser>()
-            //    .AddDefaultUI()
-            //    .AddEntityFrameworkStores<DotNetAppContext>();
-            //          services.AddIdentity <IdentityUser, IdentityRole()
-            //.AddDefaultUI()
-            //.AddEntityFrameworkStores<ApplicationDbContext>()
-            //.AddDefaultTokenProviders();
-
-            //          //password of user
-            //          services.Configure<IdentityOptions>(options =>
-            //          {
-            //              // Password settings.
-            //              options.Password.RequireDigit = false;
-            //              options.Password.RequireLowercase = false;
-            //              options.Password.RequireNonAlphanumeric = false;
-            //              options.Password.RequireUppercase = false;
-            //              options.Password.RequiredLength = 6;
-            //              options.Password.RequiredUniqueChars = 1;
-            //          });
-
-
-
-            // Add ASP.NET Identity support
+      
             services.AddIdentity<IdentityUser, IdentityRole>(
                 opts =>
                 {
@@ -93,6 +74,8 @@ namespace DotNetApp.web
 
         private void ConfigureAspnetRunServices(IServiceCollection services)
         {
+           
+         // services.AddAutoMapper(Assembly.GetAssembly(typeof(Startup)));
             //generic repository(implemented generic method)(typeof)
 
             //infrastucture
@@ -108,8 +91,11 @@ namespace DotNetApp.web
 
             //core
             services.AddScoped(typeof(IAppLogger<>), typeof(LoggerAdapter<>));
+            // services.AddAutoMapper();// Add AutoMapper
+            // services.AddAutoMapper(c => c.AddProfile<AspnetRunProfileApplication>(), typeof(Startup));
 
-            services.AddAutoMapper(typeof(Startup));
+            services.AddAutoMapper(typeof(Startup)); // Add AutoMapper
+
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
