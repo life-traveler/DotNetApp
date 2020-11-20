@@ -115,7 +115,7 @@ namespace DotNetApp.Web.Controllers
 
         public async Task<IActionResult> Delete(int id)
         {
-            _categoryPageService.DeleteCategory(id);
+          await  _categoryPageService.DeleteCategory(id);
 
             return RedirectToAction("index" , new { sorting_order =""});
         }
