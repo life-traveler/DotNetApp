@@ -1,4 +1,5 @@
 ﻿using DotNetApp.Web.ViewModels.Base;
+using Microsoft.AspNetCore.Http;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -12,6 +13,9 @@ namespace DotNetApp.Web.ViewModels
         public string Slug { get; set; }
         public string Summary { get; set; }
         public string Description { get; set; }
+
+        public IFormFile ImageName { get; set; }
+
         public string ImageFile { get; set; }
         public decimal? UnitPrice { get; set; }
         public int? UnitsInStock { get; set; }

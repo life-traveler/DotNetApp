@@ -18,9 +18,10 @@
         @*<th>CategoryName</th*@
         <th> @Html.ActionLink("Category Name", "Index", new { sorting_order = ViewBag.SortByName })  </th>
         <th> @Html.ActionLink("Category Id", "Index", new { sorting_order = ViewBag.SortById })  </th>
+        <th>Category Description</th>
         <th>Image</th>
         <th></th>
-
+        <th></th>
 
     </tr>
     @foreach (var item in Model)
@@ -34,11 +35,19 @@
                 @item.Id
             </td>
             <td>
+                @item.Description
+            </td>
+            <td>
                <img style="height:50px; width:50px;" src="~/Images/@item.PhotoPath"/> 
             </td>
+
             <td>
                 <a href="/category/delete/@item.Id">Delete</a>
             </td>
+            <td>
+                <a href ="/category/Edit/@item.Id">Edit</a>
+            </td>
+            
 
 
         </tr>

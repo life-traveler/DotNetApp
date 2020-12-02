@@ -15,6 +15,8 @@ namespace DotNetApp.Web.Interface
         Task<CategoryViewModel> AddNewCategory(CategoryViewModel categoryViewModel);
 
         Task DeleteCategory( int id);
+        Task<CategoryViewModel> GetCategoryById(int id);
+        Task UpdateCategory(CategoryViewModel categoryViewModel);
 
 
 

@@ -1,0 +1,82 @@
+﻿@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@{
+}
+
+@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@{
+}
+
+@*@model IEnumerable<DotNetApp.Web.ViewModels.CategoryViewModel>*@
+
+@model DotNetApp.Web.Services.PaginatedList<DotNetApp.Web.ViewModels.ProductViewModel>
+
+
+<a href="/product/addnewproduct" class="btn btn-info">Add new product </a>
+
+
+<table class="table">
+    <tr>
+      
+        <th> @Html.ActionLink("Product Name", "Index", new { sorting_order = ViewBag.SortByName })  </th>
+        <th> @Html.ActionLink("Product Id", "Index", new { sorting_order = ViewBag.SortById })  </th>
+        <th>Product Description</th>
+        <th>Image</th>
+        <th></th>
+        <th></th>
+
+    </tr>
+    @foreach (var item in Model)
+    {
+        <tr>
+
+            <td style="width:200px; height:auto;">
+                @item.Name
+            </td>
+            <td style="width:20px; height:auto;">
+                @item.Id
+            </td>
+            <td style="width:500px; height:auto;">
+                @item.Description
+            </td>
+            <td style="width:100px; height:100px;">
+                <img style="height:50px; width:50px;" src="~/Images/@item.ImageFile" />
+            </td>
+
+            <td>
+                <a href="/product/delete/@item.Id">Delete</a>
+            </td>
+            <td>
+                <a href="/product/Edit/@item.Id">Edit</a>
+            </td>
+
+
+
+        </tr>
+
+
+    }
+
+</table>
+
+@{
+    var prevDisabled = !Model.HasPreviousPage ? "disabled" : "";
+    var nextDisabled = !Model.HasNextPage ? "disabled" : "";
+}
+
+
+<a asp-action="Index"
+   asp-route-sortOrder="@ViewData["CurrentSort"]"
+   asp-route-pageNumber="@(Model.PageIndex - 1)"
+   class="btn btn-default @prevDisabled">
+    Previous
+</a>
+<a asp-action="Index"
+   asp-route-sortOrder="@ViewData["CurrentSort"]"
+   asp-route-pageNumber="@(Model.PageIndex + 1)"
+   class="btn btn-default @nextDisabled">
+    Next
+</a>

@@ -88,6 +88,7 @@ namespace DotNetApp.web
             //Web
             services.AddScoped<IIndexPageService, IndexPageService>();
             services.AddScoped<ICategoryPageService, CategoryPageService>();
+            services.AddScoped<IProductPageService, ProductPageService>();
 
             //core
             services.AddScoped(typeof(IAppLogger<>), typeof(LoggerAdapter<>));

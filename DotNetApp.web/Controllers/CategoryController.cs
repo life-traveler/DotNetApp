@@ -27,17 +27,17 @@ namespace DotNetApp.Web.Controllers
         {
             _categoryPageService = categoryPageService;
             _indexPageService = indexPageService;
-           _categoryService = categoryService;
+            _categoryService = categoryService;
             _hostingEnvironment = hostingEnvironment;
-    }
+        }
 
 
 
-      
+
 
         public async Task<IActionResult> Index(string sorting_order, int? pageNumber)
         {
-           
+
             ViewData["CurrentSort"] = sorting_order;
             //if the sort parameter is null or empty then we are initializing the value as descending name
             ViewBag.SortByName = string.IsNullOrEmpty(sorting_order) ? "descending Name" : "";
@@ -46,7 +46,7 @@ namespace DotNetApp.Web.Controllers
 
 
             IQueryable<CategoryViewModel> CategoryList = await _categoryPageService.GetAllCategory();
-           
+
             switch (sorting_order)
             {
 
@@ -70,9 +70,9 @@ namespace DotNetApp.Web.Controllers
             //var queryableX = CategoryList.AsQueryable();
 
             int pageSize = 3;
-     
 
-        
+
+
             return View(await PaginatedList<CategoryViewModel>.CreateAsync(CategoryList.AsNoTracking(), pageNumber ?? 1, pageSize));
 
             //var sortedCategory = CategoryList.OrderBy(c => c.Name);
@@ -90,16 +90,16 @@ namespace DotNetApp.Web.Controllers
         [HttpPost]
         public async Task<IActionResult> AddNewCategory(CategoryViewModel categoryViewModel)
         {
-            if(ModelState.IsValid)
+            if (ModelState.IsValid)
             {
-                if(categoryViewModel.ImageName != null)
+                if (categoryViewModel.ImageName != null)
                 {
                     var filePath = _hostingEnvironment.WebRootPath + "Images/";
                     var fileName = categoryViewModel.ImageName.FileName;
                     string path = Path.Combine(filePath, fileName);
-                    
+
                     categoryViewModel.ImageName.CopyTo(new FileStream(path, FileMode.Create));
-                    categoryViewModel.PhotoPath = categoryViewModel.ImageName.FileName; 
+                    categoryViewModel.PhotoPath = categoryViewModel.ImageName.FileName;
                 }
 
                 _categoryPageService.AddNewCategory(categoryViewModel);
@@ -107,7 +107,7 @@ namespace DotNetApp.Web.Controllers
             }
             else
             {
-               
+
             }
             return View();
         }
@@ -115,9 +115,40 @@ namespace DotNetApp.Web.Controllers
 
         public async Task<IActionResult> Delete(int id)
         {
-          await  _categoryPageService.DeleteCategory(id);
+            await _categoryPageService.DeleteCategory(id);
 
-            return RedirectToAction("index" , new { sorting_order =""});
+            return RedirectToAction("index", new { sorting_order = "" });
+        }
+
+
+        [HttpGet]
+        public async Task<IActionResult> Edit(int id)
+        {
+            var category = await _categoryPageService.GetCategoryById(id);
+
+            return View(category);
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> Edit(CategoryViewModel categoryViewModel)
+        {
+            if (ModelState.IsValid)
+            {
+                if (categoryViewModel.ImageName != null)
+                {
+                    var filePath = _hostingEnvironment.WebRootPath + "/Images/";
+                    var fileName = categoryViewModel.ImageName.FileName;
+                    string path = Path.Combine(filePath, fileName);
+
+                    categoryViewModel.ImageName.CopyTo(new FileStream(path, FileMode.Create));
+                    categoryViewModel.PhotoPath = categoryViewModel.ImageName.FileName;
+                }
+
+               
+            }
+           
+            await _categoryPageService.UpdateCategory(categoryViewModel);
+            return RedirectToAction("index", new { sorting_order = "" });
         }
     }
 

@@ -1,0 +1,83 @@
+﻿@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@{
+}
+
+
+@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@{
+}
+
+@model DotNetApp.Web.ViewModels.ProductViewModel
+
+<form enctype="multipart/form-data" class="form-horizontal" action="/product/addnewproduct" method="post">
+    <div class="form-group">
+        <label class="control-label col-sm-2" for="email">Name:</label>
+        <div class="col-sm-10">
+            <input type="text" class="form-control" id="Name" name="Name" placeholder="Enter Name">
+        </div>
+    </div>
+
+
+    <div class="form-group">
+        <label class="control-label col-sm-2" for="Category">Select Category:</label>
+        <div class="col-sm-10">
+            @Html.DropDownList("CategoryId", (IEnumerable<SelectListItem>)ViewBag.Categories, null, new { @class = "form-control" })
+        </div>
+    </div>
+
+
+
+
+
+    <div class="form-group">
+        <label class="control-label col-sm-2" for="pwd">Description:</label>
+        <div class="col-sm-10">
+            <input type="text" class="form-control" id="Description" name="Description" placeholder="Enter Description">
+        </div>
+    </div>
+
+    <div class="form-group">
+        <label class="control-label col-sm-2" for="pwd">ImageName:</label>
+        <div class="col-sm-10">
+            <input type="file" class="form-control" id="ImageName" name="ImageName">
+        </div>
+    </div>
+
+    <div class="form-group">
+        <label class="control-label col-sm-2" for="Summary">Summary:</label>
+        <div class="col-sm-10">
+            <input type="text" class="form-control" id="Summary" name="Summary" placeholder="Enter Summary">
+        </div>
+    </div>
+
+    <div class="form-group">
+        <label class="control-label col-sm-2" for="UnitPrice">Unit Price:</label>
+        <div class="col-sm-10">
+            <input type="text" class="form-control" id="UnitPrice" name="UnitPrice" placeholder="Enter Unit Price">
+        </div>
+    </div>
+
+    <div class="form-group">
+        <label class="control-label col-sm-2" for="UnitsInStock">Units in Stock:</label>
+        <div class="col-sm-10">
+            <input type="text" class="form-control" id="UnitsInStock" name="UnitsInStock" placeholder="Enter Units in Stock">
+        </div>
+    </div>
+    @*<div class="form-group">
+            <div class="col-sm-offset-2 col-sm-10">
+                <div class="checkbox">
+                    <label><input type="checkbox"> Remember me</label>
+                </div>
+            </div>
+        </div>*@
+
+    <div class="form-group">
+        <div class="col-sm-offset-2 col-sm-10">
+            <button type="submit" class="btn btn-default">Submit</button>
+        </div>
+    </div>
+</form> 

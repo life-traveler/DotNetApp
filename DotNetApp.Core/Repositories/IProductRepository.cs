@@ -17,5 +17,7 @@ namespace DotNetApp.Core.Repositories
         Task<Product> GetProductByIdWithCategoryAsync(int productId);
         Task<IEnumerable<Product>> GetProductByCategoryAsync(int categoryId);
 
+        Task<Product> AddNewProduct(Product product);
+
     }
 }

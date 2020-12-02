@@ -74,5 +74,18 @@ namespace DotNetApp.Web.Services
           await  _categoryRepository.DeleteAsync(category);
         
         }
+
+        public async Task<CategoryViewModel> GetCategoryById(int id)
+        {
+            var category = await _categoryRepository.GetCategoryById(id);
+           var mapped =  _mapper.Map<CategoryViewModel>(category);
+            return mapped;
+        }
+
+        public async Task UpdateCategory(CategoryViewModel categoryViewModel)
+        {
+            var mapped = _mapper.Map<Category>(categoryViewModel);
+           await _categoryRepository.UpdateAsync(mapped);
+        }
     }
 }

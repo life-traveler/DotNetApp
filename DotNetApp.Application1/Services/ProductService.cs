@@ -7,6 +7,7 @@ using DotNetApp.Core.Interface;
 using DotNetApp.Core.Repositories;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -39,6 +40,20 @@ namespace DotNetApp.Application1.Services
             //destination IEn<ProdutModel>
             var mapped = _mapper.Map<IEnumerable<ProductModel>>(productList);
             return mapped;
+        }
+
+
+        public async Task<IQueryable<Product>> GetAllProducts()
+        {
+            //var category = await _categoryRepository.GetAll();
+            //var mapped = _mapper.Map<IQueryable<CategoryModel>>(category.AsEnumerable());
+            //return mapped;
+
+
+            IQueryable<Product> query1;
+            var category = await _productRepository.GetAll();
+            //query1 = category.ProjectTo<CategoryModel>(_mapper);
+            return category;
         }
 
         public async Task<ProductModel> GetProductById(int productId)

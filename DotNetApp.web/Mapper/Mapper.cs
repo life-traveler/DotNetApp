@@ -15,6 +15,7 @@ namespace DotNetApp.Web.Mapper
 		public AspnetRunProfile()
 		{
 			CreateMap<ProductModel, ProductViewModel>();
+			CreateMap<Product, ProductViewModel>();
 			CreateMap<CategoryModel, CategoryViewModel>();
 			CreateMap<Category, CategoryViewModel>().ReverseMap();
 		}

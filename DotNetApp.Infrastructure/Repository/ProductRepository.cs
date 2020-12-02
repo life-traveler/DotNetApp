@@ -64,5 +64,14 @@ namespace DotNetApp.Infrastructure.Repository
 
 
         }
+
+
+        public async Task<Product> AddNewProduct(Product product)
+        {
+           return await AddAsync(product);
+        }
+
+
+       
     }
 }
